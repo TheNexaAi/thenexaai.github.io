@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexa AI - هوش مصنوعی نکسا</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #6C63FF;
+            --secondary-color: #4A44E0;
+            --dark-color: #2D2A55;
+            --light-color: #F8F9FF;
+            --text-color: #333;
+            --white: #FFFFFF;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+            --discord-color: #5865F2;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--white);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .navbar.shrink {
+            padding: 0.75rem 5%;
+            background-color: rgba(255, 255, 255, 0.98);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 2px 10px rgba(108, 99, 255, 0.3);
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            transition: var(--transition);
+        }
+
+        .logo-text:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 600;
+            font-size: 1rem;
+            position: relative;
+            padding: 0.5rem 0;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 8rem 5% 4rem;
+            background: linear-gradient(135deg, rgba(248, 249, 255, 0.7), rgba(255, 255, 255, 0.3));
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 1000px;
+            height: 1000px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(108, 99, 255, 0.1) 0%, rgba(255, 255, 255, 0) 70%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 600px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--dark-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 0.9rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            border: none;
+            box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(108, 99, 255, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(108, 99, 255, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .btn-discord {
+            background: linear-gradient(135deg, var(--discord-color), #4752c4);
+            color: white;
+            box-shadow: 0 4px 15px rgba(88, 101, 242, 0.3);
+        }
+
+        .btn-discord:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(88, 101, 242, 0.4);
+        }
+
+        .logo-section {
+            text-align: center;
+            margin: 5rem 0;
+            padding: 3rem 0;
+            background: linear-gradient(135deg, rgba(108, 99, 255, 0.05), rgba(255, 255, 255, 0.8));
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .logo-placeholder {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 2rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(108, 99, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-placeholder::after {
+            content: 'جای لوگو شما';
+            position: absolute;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+            bottom: 10px;
+        }
+
+        .logo-instructions {
+            color: var(--dark-color);
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .logo-code {
+            background: rgba(255, 255, 255, 0.8);
+            border: 2px dashed var(--primary-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            font-family: monospace;
+            direction: ltr;
+            text-align: left;
+            color: var(--secondary-color);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 5%;
+            background-color: var(--white);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+        }
+
+        .section-title h2 span {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-title p {
+            color: #666;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(108, 99, 255, 0.1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(108, 99, 255, 0.15);
+            border-color: rgba(108, 99, 255, 0.3);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, rgba(108, 99, 255, 0.1), rgba(74, 68, 224, 0.15));
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            color: var(--primary-color);
+            font-size: 1.8rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+        }
+
+        .feature-card p {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        /* About Section */
+        #about {
+            padding: 6rem 5%;
+            background: linear-gradient(135deg, rgba(248, 249, 255, 0.9), rgba(255, 255, 255, 0.7));
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: var(--dark-color);
+        }
+
+        .about-text h2 span {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .founders-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .founder-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(108, 99, 255, 0.1);
+        }
+
+        .founder-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(108, 99, 255, 0.15);
+            border-color: rgba(108, 99, 255, 0.3);
+        }
+
+        .founder-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2.5rem;
+            font-weight: bold;
+            box-shadow: 0 10px 25px rgba(108, 99, 255, 0.3);
+        }
+
+        .founder-name {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--dark-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .founder-role {
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .founder-desc {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .support-section {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: white;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(108, 99, 255, 0.1);
+        }
+
+        .support-email {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin: 1rem 0;
+            direction: ltr;
+            display: block;
+        }
+
+        .support-email:hover {
+            text-decoration: underline;
+        }
+
+        /* Discord Section */
+        #discord {
+            padding: 6rem 5%;
+            background: linear-gradient(135deg, rgba(88, 101, 242, 0.05), rgba(255, 255, 255, 0.9));
+            text-align: center;
+        }
+
+        .discord-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .discord-content h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: var(--dark-color);
+        }
+
+        .discord-content h2 span {
+            color: var(--discord-color);
+        }
+
+        .discord-content p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .discord-bot {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 2rem auto;
+            max-width: 600px;
+            box-shadow: 0 10px 30px rgba(88, 101, 242, 0.2);
+            border: 2px solid rgba(88, 101, 242, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .discord-bot::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--discord-color), #4752c4, #5865F2);
+        }
+
+        .discord-icon {
+            font-size: 4rem;
+            color: var(--discord-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .discord-bot h3 {
+            font-size: 1.8rem;
+            color: var(--dark-color);
+            margin-bottom: 1rem;
+        }
+
+        .discord-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .discord-feature {
+            padding: 1rem;
+            border-radius: 12px;
+            background: rgba(88, 101, 242, 0.05);
+            text-align: center;
+        }
+
+        .discord-feature i {
+            font-size: 1.8rem;
+            color: var(--discord-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .discord-feature h4 {
+            font-weight: 600;
+            color: var(--dark-color);
+        }
+
+        /* Download Section */
+        #download {
+            padding: 6rem 5%;
+            background-color: white;
+            text-align: center;
+        }
+
+        .download-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .download-content h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: var(--dark-color);
+        }
+
+        .download-content p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 3rem;
+            line-height: 1.8;
+        }
+
+        .platforms {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+
+        .platform-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            min-width: 180px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .platform-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+        }
+
+        .platform-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .platform-name {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark-color);
+        }
+
+        .platform-sub {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* FAQ Section */
+        #faq {
+            padding: 6rem 5%;
+            background: linear-gradient(135deg, rgba(248, 249, 255, 0.9), rgba(255, 255, 255, 0.7));
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 16px;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid rgba(108, 99, 255, 0.1);
+        }
+
+        .faq-item:hover {
+            border-color: rgba(108, 99, 255, 0.3);
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--dark-color);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(108, 99, 255, 0.03);
+            transition: var(--transition);
+        }
+
+        .faq-question:hover {
+            background: rgba(108, 99, 255, 0.08);
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: var(--transition);
+            background: white;
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            max-height: 500px;
+        }
+
+        .faq-toggle {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg);
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, var(--dark-color), #1a1733);
+            color: white;
+            padding: 4rem 5% 2rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .social-link {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 2rem;
+            font-size: 0.95rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .founders-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                flex-direction: column;
+                width: 90%;
+                max-width: 300px;
+                background: white;
+                box-shadow: var(--shadow);
+                border-radius: 16px;
+                padding: 2rem;
+                gap: 1.5rem;
+                transition: var(--transition);
+                z-index: 999;
+            }
+            
+            .nav-links.active {
+                right: 10px;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+			
+            .discord-bot {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero {
+                padding: 7rem 5% 3rem;
+            }
+            
+            .navbar {
+                padding: 1rem 5%;
+            }
+            
+            .logo-text {
+                font-size: 1.3rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .download-content h2 {
+                font-size: 2rem;
+            }
+            
+            .about-text h2 {
+                font-size: 2rem;
+            }
+            
+            .founder-avatar {
+                width: 80px;
+                height: 80px;
+                font-size: 2rem;
+            }
+            
+            .discord-content h2 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Scroll Progress Bar */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            z-index: 1001;
+            transition: width 0.3s ease;
+        }
+
+        /* Floating Elements */
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Gradient Border Effect */
+        .gradient-border {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color), #ff4d8d, #ffcc00);
+            z-index: -1;
+            animation: gradientRotate 8s linear infinite;
+        }
+
+        @keyframes gradientRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <nav class="navbar" id="navbar">
+        <div class="logo-container">
+            <div class="logo-img">
+                <i class="fas fa-brain"></i>
+            </div>
+            <div class="logo-text">Nexa AI</div>
+        </div>
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
+        </button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#discord">Discord Bot</a></li>
+            <li><a href="#download">Download</a></li>
+            <li><a href="#faq">FAQ</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>هوش مصنوعی انقلابی برای آینده‌ای روشن</h1>
+            <p>Nexa هوش مصنوعی پیشرفته‌ای است که با استفاده از فناوری‌های روز دنیا، تجربه‌ای بی‌نظیر برای کاربران ایجاد می‌کند. با قابلیت‌های بی‌نظیر، Nexa همراه شما در سفر به سوی آینده است.</p>
+            <div class="cta-buttons">
+                <a href="#download" class="btn btn-primary">دانلود اپلیکیشن</a>
+                <a href="#discord" class="btn btn-discord">ربات دیسکورد</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="section-title">
+            <h2>قابلیت‌های <span>بی‌نظیر</span> Nexa</h2>
+            <p>Nexa با استفاده از پیشرفته‌ترین الگوریتم‌های هوش مصنوعی، تجربه‌ای منحصر به فرد برای شما ایجاد می‌کند.</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card floating">
+                <div class="feature-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3>هوش مصنوعی پیشرفته</h3>
+                <p>الگوریتم‌های یادگیری عمیق که به مرور زمان هوشمندتر می‌شوند و نیازهای شما را بهتر درک می‌کنند.</p>
+            </div>
+            <div class="feature-card floating" style="animation-delay: 0.2s">
+                <div class="feature-icon">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <h3>سرعت خارق‌العاده</h3>
+                <p>پردازش فوری درخواست‌ها با حداقل تأخیر و حداکثر کارایی برای تجربه‌ای روان و لذت‌بخش.</p>
+            </div>
+            <div class="feature-card floating" style="animation-delay: 0.4s">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>امنیت بالا</h3>
+                <p>حفاظت کامل از داده‌های شخصی شما با رمزنگاری پیشرفته و سیاست‌های حریم خصوصی سخت‌گیرانه.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="section-title">
+            <h2>سازندگان <span>Nexa AI</span></h2>
+            <p>تیم متخصص و پرانرژی پشت هوش مصنوعی Nexa</p>
+        </div>
+        <div class="about-content">
+            <div class="about-text">
+                <p>Nexa AI توسط یک تیم کوچک اما بسیار متعهد و متخصص توسعه یافته است. ما عاشق فناوری و هوش مصنوعی هستیم و با تمام وجود تلاش می‌کنیم تا بهترین تجربه را برای کاربران فراهم کنیم.</p>
+                <p>این پروژه با هدف ایجاد هوش مصنوعی‌ای در دسترس و کاربرپسند برای همه کاربران ایرانی آغاز شد و امروزه به یکی از پیشرفته‌ترین هوش‌های مصنوعی در منطقه تبدیل شده است.</p>
+                <p>ما به صورت مستمر در حال بهبود و اضافه کردن قابلیت‌های جدید به Nexa هستیم تا بتوانیم نیازهای روزافزون کاربران را برآورده کنیم.</p>
+                
+                <div class="founders-grid">
+                    <div class="founder-card">
+                        <div class="founder-avatar">
+                            I
+                        </div>
+                        <div class="founder-name">Iliya Hashemi</div>
+                        <div class="founder-role">Owner & CEO</div>
+                        <div class="founder-desc">بنیانگذار اصلی و مدیرعامل پروژه Nexa AI. متخصص در زمینه هوش مصنوعی و یادگیری عمیق.</div>
+                    </div>
+                    <div class="founder-card">
+                        <div class="founder-avatar" style="background: linear-gradient(135deg, #FF6B6B, #EE5A24);">
+                            M
+                        </div>
+                        <div class="founder-name">Mahdyar Piade Kohsar</div>
+                        <div class="founder-role">Co-Owner & CTO</div>
+                        <div class="founder-desc">مدیر فناوری و هم‌بنیانگذار پروژه. متخصص در زمینه توسعه نرم‌افزار و سیستم‌های توزیع شده.</div>
+                    </div>
+                    <div class="founder-card">
+                        <div class="founder-avatar" style="background: linear-gradient(135deg, #FF6B6B, #EE5A24);">
+                            I
+                        </div>
+                        <div class="founder-name">Iliya Rajabi</div>
+                        <div class="founder-role">Co-Owner & CTO</div>
+                        <div class="founder-desc">مدیر فناوری و هم‌بنیانگذار پروژه. متخصص در زمینه توسعه نرم‌افزار و سیستم‌های توزیع شده.</div>
+                    </div>                   
+                </div>
+
+                <div class="support-section">
+                    <h3><i class="fas fa-headset"></i> پشتیبانی و تماس با ما</h3>
+                    <p>برای دریافت پشتیبانی، گزارش باگ‌ها یا پیشنهادات، با ما در ارتباط باشید:</p>
+                    <a href="mailto:iliyahashemi08@gmail.com" class="support-email">
+                        <i class="fas fa-envelope"></i> iliyahashemi08@gmail.com
+                    </a>
+                    <p>ما 24 ساعته پاسخگوی شما هستیم و تمام تلاش خود را برای حل مشکلات و بهبود تجربه کاربری می‌کنیم.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="discord" id="discord">
+        <div class="discord-content">
+            <h2>ربات دیسکورد <span>Nexa AI</span></h2>
+            <p>Nexa AI حالا در سرورهای دیسکورد شما حضور دارد! یک ربات هوشمند که می‌تواند به سؤالات شما پاسخ دهد، تصاویر ایجاد کند و حتی با شما چت کند.</p>
+            
+            <div class="discord-bot">
+                <div class="discord-icon">
+                    <i class="fab fa-discord"></i>
+                </div>
+                <h3>Nexa AI Discord Bot</h3>
+                <p>ربات هوش مصنوعی پیشرفته برای سرورهای دیسکورد شما</p>
+                
+                <div class="discord-features">
+                    <div class="discord-feature">
+                        <i class="fas fa-comment"></i>
+                        <h4>چت هوشمند</h4>
+                    </div>
+                    <div class="discord-feature">
+                        <i class="fas fa-image"></i>
+                        <h4>تولید تصویر</h4>
+                    </div>
+                    <div class="discord-feature">
+                        <i class="fas fa-music"></i>
+                        <h4>موسیقی</h4>
+                    </div>
+                    <div class="discord-feature">
+                        <i class="fas fa-gamepad"></i>
+                        <h4>بازی‌ها</h4>
+                    </div>
+                </div>
+                
+                <a href="https://discord.com/oauth2/authorize?client_id=1446835444158566440&permissions=8&integration_type=0&scope=bot" class="btn btn-discord">
+                    <i class="fab fa-discord"></i> اضافه کردن ربات به سرور
+                </a>
+            </div>
+            
+            <p style="margin-top: 2rem;">ربات دیسکورد Nexa AI به صورت کاملاً رایگان در اختیار شما قرار می‌گیرد و به مرور زمان قابلیت‌های جدیدی به آن اضافه خواهد شد.</p>
+        </div>
+    </section>
+
+    <!-- Download Section -->
+    <section class="download" id="download">
+        <div class="download-content">
+            <h2>همین حالا <span>Nexa</span> را دانلود کنید</h2>
+            <p>تجربه هوش مصنوعی پیشرفته را در دستگاه خود داشته باشید. Nexa برای تمام پلتفرم‌های اصلی در دسترس است.</p>
+            
+                <div class="platform-card gradient-border">
+                    <div class="platform-icon">
+                        <i class="fas fa-desktop"></i>
+                    </div>
+                    <div class="platform-name">Windows</div>
+                    <div class="platform-sub">نسخه 1.5.2</div>
+                </div>
+            </div>
+            <a href="https://uploadkon.ir/uploads/aed113_25NexaAI.rar" download class="btn btn-primary" style="margin-top: 2rem;">
+    دانلود از وبسایت رسمی
+</a>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="faq">
+        <div class="section-title">
+            <h2>سوالات <span>متداول</span></h2>
+            <p>پاسخ به سؤالات رایج کاربران در مورد Nexa AI</p>
+        </div>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">
+                    Nexa چگونه کار می‌کند؟
+                    <div class="faq-toggle">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                </div>
+                <div class="faq-answer">
+                    <p>Nexa با استفاده از الگوریتم‌های پیشرفته یادگیری عمیق و شبکه‌های عصبی، داده‌ها را تحلیل کرده و الگوهای پیچیده را شناسایی می‌کند. این سیستم به‌طور مداوم از تعاملات کاربر یاد می‌گیرد و با گذشت زمان هوشمندتر می‌شود.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    آیا داده‌های من امن هستند؟
+                    <div class="faq-toggle">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                </div>
+                <div class="faq-answer">
+                    <p>بله، امنیت داده‌های کاربران برای ما در اولویت است. ما از رمزنگاری end-to-end استفاده می‌کنیم و هیچ داده شخصی شما بدون مجوز شما ذخیره یا به اشتراک گذاشته نمی‌شود. تمام پردازش‌ها در محیطی ایمن و تحت استانداردهای بین‌المللی امنیت انجام می‌شود.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    هزینه استفاده از Nexa چقدر است؟
+                    <div class="faq-toggle">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                </div>
+                <div class="faq-answer">
+                    <p>Nexa نسخه رایگان کاملی دارد که تمام قابلیت‌های اصلی را پوشش می‌دهد. برای کاربرانی که نیاز به قابلیت‌های پیشرفته‌تر دارند، نسخه پرمیوم با قیمت‌های رقابتی ارائه می‌شود. ما همچنین برای دانشجویان و سازمان‌های غیرانتفاعی تخفیف‌های ویژه‌ای داریم.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    چگونه می‌توانم از ربات دیسکورد استفاده کنم؟
+                    <div class="faq-toggle">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                </div>
+                <div class="faq-answer">
+                    <p>برای استفاده از ربات دیسکورد Nexa AI، کافی است روی دکمه "اضافه کردن ربات به سرور" کلیک کنید و سپس سرور مورد نظر خود را انتخاب نمایید. پس از اضافه کردن ربات، می‌توانید با ارسال دستور !help تمام قابلیت‌های ربات را مشاهده کنید. ربات به صورت خودکار در کانال‌های متنی شما فعال می‌شود.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">Nexa AI</div>
+            <p>هوش مصنوعی انقلابی برای آینده‌ای روشن</p>
+            <div class="footer-links">
+                <a href="#home">صفحه اصلی</a>
+                <a href="#about">سازندگان</a>
+                <a href="#discord">ربات دیسکورد</a>
+                <a href="#download">دانلود</a>
+                <a href="#faq">سوالات متداول</a>
+                <a href="#">تماس با پشتیبانی</a>
+            </div>
+            <div class="social-links">
+                <a href="#" class="social-link"><i class="fab fa-telegram"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/TheNexaAi" class="social-link"><i class="fab fa-github"></i></a>
+                <a href="#" class="social-link" style="background: rgba(88, 101, 242, 0.2);">
+                    <i class="fab fa-discord"></i>
+                </a>
+            </div>
+            <div class="copyright">
+                &copy; 2025 Nexa AI. تمامی حقوق محفوظ است. | ایمیل پشتیبانی: iliyahashemi08@gmail.com
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileMenuBtn.innerHTML = navLinks.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+            });
+        });
+
+        // Navbar shrink on scroll
+        const navbar = document.getElementById('navbar');
+        const scrollProgress = document.getElementById('scrollProgress');
+        
+        window.addEventListener('scroll', () => {
+            // Navbar shrink
+            if (window.scrollY > 100) {
+                navbar.classList.add('shrink');
+            } else {
+                navbar.classList.remove('shrink');
+            }
+            
+            // Scroll progress
+            const scrollTop = document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollPercent = (scrollTop / scrollHeight) * 100;
+            scrollProgress.style.width = `${scrollPercent}%`;
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // FAQ Toggle
+        document.querySelectorAll('.faq-item').forEach(item => {
+            const question = item.querySelector('.faq-question');
+            const toggleIcon = item.querySelector('.faq-toggle i');
+            
+            question.addEventListener('click', () => {
+                item.classList.toggle('active');
+                
+                if (item.classList.contains('active')) {
+                    toggleIcon.classList.remove('fa-plus');
+                    toggleIcon.classList.add('fa-times');
+                } else {
+                    toggleIcon.classList.remove('fa-times');
+                    toggleIcon.classList.add('fa-plus');
+                }
+            });
+        });
+
+        // Animation on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.feature-card, .founder-card, .discord-bot, .platform-card, .faq-item');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (elementPosition < screenPosition) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+
+        // Set initial states for animations
+        document.querySelectorAll('.feature-card, .founder-card, .discord-bot, .platform-card, .faq-item').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        });
+
+        // Initialize animations
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+
+        // Initialize with current scroll position
+        window.dispatchEvent(new Event('scroll'));
+
+        // Floating elements animation
+        document.querySelectorAll('.floating').forEach((element, index) => {
+            element.style.animationDelay = `${index * 0.3}s`;
+        });
+
+        // Add scroll reveal to section titles
+        document.querySelectorAll('.section-title').forEach(title => {
+            title.style.opacity = '0';
+            title.style.transform = 'translateY(20px)';
+            title.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+        });
+
+        const revealSectionTitles = () => {
+            document.querySelectorAll('.section-title').forEach(title => {
+                const titlePosition = title.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.2;
+                
+                if (titlePosition < screenPosition) {
+                    title.style.opacity = '1';
+                    title.style.transform = 'translateY(0)';
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealSectionTitles);
+        window.addEventListener('load', revealSectionTitles);
+
+        // Discord bot hover effect
+        const discordBot = document.querySelector('.discord-bot');
+        if (discordBot) {
+            discordBot.addEventListener('mouseenter', () => {
+                discordBot.style.transform = 'translateY(-5px)';
+                discordBot.style.boxShadow = '0 15px 35px rgba(88, 101, 242, 0.3)';
+            });
+            
+            discordBot.addEventListener('mouseleave', () => {
+                discordBot.style.transform = 'translateY(0)';
+                discordBot.style.boxShadow = '0 10px 30px rgba(88, 101, 242, 0.2)';
+            });
+        }
+
+        // Support email hover effect
+        const supportEmail = document.querySelector('.support-email');
+        if (supportEmail) {
+            supportEmail.addEventListener('click', (e) => {
+                e.preventDefault();
+                alert('ایمیل پشتیبانی باز شد: iliyahashemi08@gmail.com');
+                // In real implementation, this would open the default email client
+                window.location.href = 'mailto:iliyahashemi08@gmail.com';
+            });
+        }
+    </script>
+</body>
+</html>
